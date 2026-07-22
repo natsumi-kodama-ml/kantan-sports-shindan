@@ -9,53 +9,84 @@ const PALETTES: Record<SportKey, { from: string; to: string; line: string }> = {
 };
 
 function Motif({ sport, line }: { sport: SportKey; line: string }) {
+  const limb = {
+    fill: "none",
+    stroke: line,
+    strokeWidth: 12,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
   switch (sport) {
     case "running":
       return (
         <g>
-          <circle cx="320" cy="70" r="34" fill="none" stroke={line} strokeWidth="2" />
-          <path d="M0 210 H400" stroke={line} strokeWidth="2" />
-          <path
-            d="M70 210 l18 -34 l22 8 l14 -20 l20 4"
-            fill="none"
-            stroke={line}
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <circle cx="205" cy="44" r="17" fill={line} />
+          <path d="M203 61 L186 128" {...limb} />
+          {/* arms */}
+          <path d="M196 73 L174 58 L156 76" {...limb} strokeWidth={9} />
+          <path d="M196 78 L217 98 L207 121" {...limb} strokeWidth={9} />
+          {/* front leg planted */}
+          <path d="M186 128 L166 167 L180 206" {...limb} />
+          {/* back leg trailing, bent up */}
+          <path d="M186 128 L212 156 L239 141" {...limb} />
         </g>
       );
     case "strength":
       return (
-        <g stroke={line} strokeWidth="3" fill="none">
-          <rect x="60" y="120" width="280" height="10" />
-          <rect x="40" y="100" width="24" height="50" />
-          <rect x="336" y="100" width="24" height="50" />
-          <rect x="20" y="112" width="16" height="26" />
-          <rect x="364" y="112" width="16" height="26" />
+        <g fill={line}>
+          <rect x="140" y="120" width="120" height="16" rx="8" />
+          <rect x="95" y="93" width="46" height="70" rx="10" />
+          <rect x="259" y="93" width="46" height="70" rx="10" />
+          <rect x="78" y="103" width="16" height="50" rx="6" />
+          <rect x="306" y="103" width="16" height="50" rx="6" />
         </g>
       );
     case "yoga":
       return (
-        <g stroke={line} strokeWidth="2" fill="none">
-          <circle cx="320" cy="65" r="26" />
-          <path d="M40 220 Q 120 160 200 220 T 360 220" />
-          <path d="M40 240 Q 120 190 200 240 T 360 240" opacity="0.6" />
+        <g fill={line}>
+          {/* seated meditation silhouette: head + cross-legged base */}
+          <circle cx="200" cy="72" r="19" />
+          <path d="M144 206 Q150 128 200 128 Q250 128 256 206 Z" />
+          <circle cx="163" cy="168" r="9" />
+          <circle cx="237" cy="168" r="9" />
         </g>
       );
     case "futsal":
       return (
-        <g stroke={line} strokeWidth="2" fill="none">
-          <circle cx="310" cy="70" r="24" />
-          <path d="M296 56 L324 84 M324 56 L296 84" />
-          <path d="M0 240 H400 M60 190 V240 M340 190 V240" />
+        <g>
+          <circle cx="188" cy="47" r="15" fill={line} />
+          <path d="M188 62 L174 118" {...limb} />
+          {/* support leg */}
+          <path d="M174 118 L163 158 L177 204" {...limb} />
+          {/* kicking leg extended toward ball */}
+          <path d="M174 118 L214 138 L253 130" {...limb} />
+          {/* arms for balance */}
+          <path d="M181 71 L154 89" {...limb} strokeWidth={8} />
+          <path d="M197 71 L224 64" {...limb} strokeWidth={8} />
+          {/* ball */}
+          <circle cx="268" cy="122" r="19" fill={line} />
+          <path
+            d="M288 108 Q300 122 288 137"
+            fill="none"
+            stroke={line}
+            strokeWidth={4}
+            strokeLinecap="round"
+            opacity={0.55}
+          />
         </g>
       );
     case "bouldering":
       return (
-        <g stroke={line} strokeWidth="2" fill="none">
-          <path d="M20 230 L110 110 L170 190 L230 90 L400 230 Z" />
-          <path d="M170 190 L230 90 L280 150" />
+        <g fill={line}>
+          {/* climbing wall: holds ascending diagonally, plus a carabiner for context */}
+          <circle cx="110" cy="205" r="17" />
+          <circle cx="165" cy="165" r="13" />
+          <ellipse cx="225" cy="130" rx="16" ry="11" transform="rotate(-20 225 130)" />
+          <circle cx="270" cy="90" r="14" />
+          <ellipse cx="235" cy="55" rx="12" ry="9" transform="rotate(15 235 55)" />
+          <circle cx="150" cy="95" r="9" opacity={0.5} />
+          <circle cx="90" cy="130" r="8" opacity={0.5} />
         </g>
       );
   }
