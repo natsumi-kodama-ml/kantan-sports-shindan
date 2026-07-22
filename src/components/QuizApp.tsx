@@ -237,6 +237,23 @@ function ResultScreen({
   const sport = sportOf(result.winner);
   const maxScore = Math.max(...Object.values(result.scores));
 
+  const mailSubject = encodeURIComponent(
+    `スポーツ診断結果について相談したいです（${sport.name}）`
+  );
+  const mailBody = encodeURIComponent(
+    `ご担当者様\n\n` +
+      `スポーツ診断ツールで「${sport.name}」という結果が出ました。\n` +
+      `この結果について詳しく相談したいので、ご連絡いただけますでしょうか。\n\n` +
+      `--- 診断結果 ---\n` +
+      `おすすめスポーツ: ${sport.name}\n` +
+      result.reasons
+        .slice(0, 3)
+        .map((r) => `・${r.reason}`)
+        .join("\n") +
+      `\n`
+  );
+  const mailtoHref = `mailto:natsumi.kodama@monstar-lab.com?subject=${mailSubject}&body=${mailBody}`;
+
   return (
     <div className="flex flex-col gap-10">
       <div className="relative aspect-[4/3] overflow-hidden paper-grain">
@@ -275,6 +292,27 @@ function ResultScreen({
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="flex flex-col gap-4 bg-forest-dark text-ivory p-6 md:p-8">
+        <div className="flex flex-col gap-1">
+          <p className="text-xs tracking-[0.3em] uppercase text-ivory/60">
+            Next Step
+          </p>
+          <h2 className="font-heading text-xl md:text-2xl">
+            この診断結果を、担当者と話してみませんか？
+          </h2>
+          <p className="text-sm text-ivory/70 leading-relaxed">
+            {sport.name}を始める前の不安なことや、あなたに合った始め方を
+            担当者が個別にご相談に乗ります。
+          </p>
+        </div>
+        <a
+          href={mailtoHref}
+          className="self-start bg-ivory text-navy px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-paper transition-colors"
+        >
+          担当者に相談する
+        </a>
       </section>
 
       <section className="flex flex-col gap-3">
