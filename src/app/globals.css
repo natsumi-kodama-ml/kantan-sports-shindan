@@ -8,6 +8,7 @@
   --forest-dark: #33422f;
   --navy: #26364a;
   --line: #ddd3ba;
+  --rust: #a3462e;
 }
 
 @theme inline {
@@ -18,6 +19,7 @@
   --color-forest-dark: var(--forest-dark);
   --color-navy: var(--navy);
   --color-line: var(--line);
+  --color-rust: var(--rust);
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);
 }

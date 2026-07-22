@@ -22,12 +22,18 @@ export default function QuizApp() {
     const next = [...answers];
     next[questionIndex] = optionIndex;
     setAnswers(next);
+  }
 
+  function goNext(questionIndex: number) {
+    if (answers[questionIndex] === null) {
+      return false;
+    }
     if (questionIndex < QUESTIONS.length - 1) {
       setStep(questionIndex + 1);
     } else {
       setStep("result");
     }
+    return true;
   }
 
   function goBack() {
@@ -50,9 +56,11 @@ export default function QuizApp() {
 
       {typeof step === "number" && (
         <QuestionScreen
+          key={step}
           questionIndex={step}
           selected={answers[step]}
           onSelect={(optionIndex) => selectOption(step, optionIndex)}
+          onNext={() => goNext(step)}
           onBack={goBack}
         />
       )}
@@ -113,15 +121,31 @@ function QuestionScreen({
   questionIndex,
   selected,
   onSelect,
+  onNext,
   onBack,
 }: {
   questionIndex: number;
   selected: number | null;
   onSelect: (optionIndex: number) => void;
+  onNext: () => boolean;
   onBack: () => void;
 }) {
+  const [showError, setShowError] = useState(false);
   const question = QUESTIONS[questionIndex];
   const progress = ((questionIndex + 1) / QUESTIONS.length) * 100;
+  const isLast = questionIndex === QUESTIONS.length - 1;
+
+  function handleSelect(optionIndex: number) {
+    setShowError(false);
+    onSelect(optionIndex);
+  }
+
+  function handleNext() {
+    const advanced = onNext();
+    if (!advanced) {
+      setShowError(true);
+    }
+  }
 
   return (
     <div className="flex flex-col gap-10">
@@ -144,16 +168,20 @@ function QuestionScreen({
         {question.title}
       </h2>
 
-      <div className="flex flex-col">
+      <div
+        className={`flex flex-col border-t transition-colors ${
+          showError ? "border-rust" : "border-line"
+        }`}
+      >
         {question.options.map((option, optionIndex) => {
           const isSelected = selected === optionIndex;
           return (
             <button
               key={option.label}
-              onClick={() => onSelect(optionIndex)}
-              className={`flex items-center gap-5 text-left py-4 border-b border-line transition-colors ${
-                isSelected ? "bg-forest/10" : "hover:bg-paper"
-              }`}
+              onClick={() => handleSelect(optionIndex)}
+              className={`flex items-center gap-5 text-left py-4 border-b transition-colors ${
+                showError ? "border-rust" : "border-line"
+              } ${isSelected ? "bg-forest/10" : "hover:bg-paper"}`}
             >
               <span
                 className={`font-heading text-sm w-8 shrink-0 ${
@@ -174,12 +202,27 @@ function QuestionScreen({
         })}
       </div>
 
-      <button
-        onClick={onBack}
-        className="self-start text-xs tracking-[0.2em] uppercase text-ink/50 hover:text-forest-dark transition-colors"
-      >
-        ← {questionIndex === 0 ? "トップに戻る" : "前の質問に戻る"}
-      </button>
+      {showError && (
+        <p className="text-sm text-rust -mt-4">
+          「{question.title}」を選んでから次へ進んでください。
+        </p>
+      )}
+
+      <div className="flex items-center justify-between">
+        <button
+          onClick={onBack}
+          className="text-xs tracking-[0.2em] uppercase text-ink/50 hover:text-forest-dark transition-colors"
+        >
+          ← {questionIndex === 0 ? "トップに戻る" : "前の質問に戻る"}
+        </button>
+
+        <button
+          onClick={handleNext}
+          className="bg-navy text-ivory px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-forest-dark transition-colors"
+        >
+          {isLast ? "結果を見る" : "次へ"}
+        </button>
+      </div>
     </div>
   );
 }
