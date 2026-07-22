@@ -1,48 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --ivory: #f6f1e6;
-  --paper: #faf7ef;
-  --ink: #262a22;
-  --forest: #45573f;
-  --forest-dark: #33422f;
-  --navy: #26364a;
-  --line: #ddd3ba;
-  --rust: #a3462e;
+  --cream: #fbeae1;
+  --card: #ffffff;
+  --ink: #20263a;
+  --blue: #2e4a9e;
+  --blue-dark: #1f3570;
+  --orange: #f2793c;
+  --red: #e8432f;
+  --yellow: #ffc93c;
+  --line: #f0e4da;
 }
 
 @theme inline {
-  --color-ivory: var(--ivory);
-  --color-paper: var(--paper);
+  --color-cream: var(--cream);
+  --color-card: var(--card);
   --color-ink: var(--ink);
-  --color-forest: var(--forest);
-  --color-forest-dark: var(--forest-dark);
-  --color-navy: var(--navy);
+  --color-blue: var(--blue);
+  --color-blue-dark: var(--blue-dark);
+  --color-orange: var(--orange);
+  --color-red: var(--red);
+  --color-yellow: var(--yellow);
   --color-line: var(--line);
-  --color-rust: var(--rust);
   --font-sans: var(--font-body);
-  --font-heading: var(--font-heading);
+  --font-heading: var(--font-body);
 }
 
 body {
   font-family: var(--font-body), sans-serif;
-}
-
-.paper-grain {
-  position: relative;
-}
-
-.paper-grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-  background-image: radial-gradient(
-      circle at 1px 1px,
-      rgba(38, 42, 34, 0.06) 1px,
-      transparent 0
-    );
-  background-size: 3px 3px;
 }

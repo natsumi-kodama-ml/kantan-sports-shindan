@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Zen_Old_Mincho } from "next/font/google";
+import { M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 
-const bodyFont = Noto_Sans_JP({
+const bodyFont = M_PLUS_Rounded_1c({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
-
-const headingFont = Zen_Old_Mincho({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["400", "500", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -25,11 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ja"
-      className={`${bodyFont.variable} ${headingFont.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-ivory text-ink">{children}</body>
+    <html lang="ja" className={`${bodyFont.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-cream text-ink">{children}</body>
     </html>
   );
 }
