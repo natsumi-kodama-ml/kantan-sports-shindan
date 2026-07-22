@@ -97,9 +97,9 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           </p>
           <div className="flex flex-col gap-3">
             <h1 className="font-heading font-extrabold text-3xl md:text-4xl leading-tight text-white drop-shadow-sm">
-              あなたの
+              かんたん
               <br />
-              次の一歩を診断
+              スポーツ診断
             </h1>
             <button
               onClick={onStart}
