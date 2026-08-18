@@ -319,6 +319,51 @@ function ResultScreen({
         </ul>
       </section>
 
+      <section className="bg-card rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-4">
+        <h2 className="text-xs font-bold tracking-[0.15em] text-ink/50 uppercase">
+          他のスポーツとの相性
+        </h2>
+        <div className="flex flex-col gap-4">
+          {(Object.entries(result.scores) as [SportKey, number][])
+            .sort((a, b) => b[1] - a[1])
+            .map(([key, score], rank) => {
+              const other = sportOf(key);
+              return (
+                <div
+                  key={key}
+                  className="flex flex-col gap-2 pb-4 border-b border-line last:border-none last:pb-0"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl overflow-hidden shrink-0 shadow-sm">
+                      <SportArt sport={key} className="w-full h-full" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-ink">
+                        {rank === 0 ? "★ " : ""}
+                        {other.name}
+                      </p>
+                      <p className="text-xs text-ink/50 truncate">
+                        {other.tagline}
+                      </p>
+                    </div>
+                    <span className="text-xs font-bold text-ink/50 shrink-0">
+                      {score}
+                    </span>
+                  </div>
+                  <div className="h-2 rounded-full bg-cream overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-blue to-orange"
+                      style={{
+                        width: `${maxScore === 0 ? 0 : (score / maxScore) * 100}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+      </section>
+
       <section className="rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-4 bg-gradient-to-br from-blue to-blue-dark text-white">
         <div className="flex flex-col gap-1">
           <p className="text-xs font-bold tracking-[0.3em] uppercase text-white/60">
@@ -338,34 +383,6 @@ function ResultScreen({
         >
           担当者に相談する
         </a>
-      </section>
-
-      <section className="bg-card rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-4">
-        <h2 className="text-xs font-bold tracking-[0.15em] text-ink/50 uppercase">
-          全スポーツのスコア
-        </h2>
-        <div className="flex flex-col gap-3">
-          {(Object.entries(result.scores) as [SportKey, number][])
-            .sort((a, b) => b[1] - a[1])
-            .map(([key, score]) => (
-              <div key={key} className="flex items-center gap-4 text-sm">
-                <span className="w-32 shrink-0 text-ink/70 font-medium">
-                  {sportOf(key).name}
-                </span>
-                <div className="flex-1 h-2.5 rounded-full bg-cream overflow-hidden">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-blue to-orange"
-                    style={{
-                      width: `${maxScore === 0 ? 0 : (score / maxScore) * 100}%`,
-                    }}
-                  />
-                </div>
-                <span className="w-6 text-right text-ink/50 text-xs font-bold">
-                  {score}
-                </span>
-              </div>
-            ))}
-        </div>
       </section>
 
       <button
