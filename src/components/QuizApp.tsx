@@ -163,7 +163,7 @@ function QuestionScreen({
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 min-h-[600px]">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-baseline text-xs font-bold tracking-[0.15em] text-ink/50 uppercase">
           <span>
@@ -179,7 +179,7 @@ function QuestionScreen({
         </div>
       </div>
 
-      <div className="bg-card rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-6">
+      <div className="bg-card rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-6 flex-1">
         <h2 className="font-heading font-extrabold text-xl md:text-2xl leading-snug text-ink">
           {question.title}
         </h2>
