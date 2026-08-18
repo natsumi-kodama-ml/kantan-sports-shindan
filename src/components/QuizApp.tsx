@@ -275,15 +275,20 @@ function ResultScreen({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-md">
-        <SportArt sport={result.winner} className="w-full h-full" />
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pt-16 pb-6">
-          <p className="text-xs font-bold tracking-[0.3em] text-white/70 uppercase mb-1">
-            Your Result
-          </p>
-          <h1 className="font-heading font-extrabold text-3xl md:text-4xl text-white">
-            {sport.name}
-          </h1>
+      <div className="rounded-3xl overflow-hidden shadow-md bg-card">
+        <p className="text-center font-heading font-bold text-lg md:text-xl text-ink pt-5 pb-3 px-6">
+          あなたに一番向いているスポーツは？
+        </p>
+        <div className="relative aspect-[4/3]">
+          <SportArt sport={result.winner} className="w-full h-full" />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pt-16 pb-6">
+            <p className="text-xs font-bold tracking-[0.3em] text-white/70 uppercase mb-1">
+              Your Result
+            </p>
+            <h1 className="font-heading font-extrabold text-3xl md:text-4xl text-white">
+              {sport.name}
+            </h1>
+          </div>
         </div>
       </div>
 
