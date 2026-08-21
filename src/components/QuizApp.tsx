@@ -117,6 +117,26 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           {QUESTIONS.length}つの質問に答えると、あなたに向いているスポーツと
           その理由が分かります。所要時間は1分ほどです。
         </p>
+        <div className="flex gap-3">
+          <div className="flex-1 flex flex-col items-center gap-0.5 rounded-2xl bg-cream py-3">
+            <span className="font-heading font-extrabold text-lg text-blue">
+              1分
+            </span>
+            <span className="text-[11px] text-ink/50">所要時間</span>
+          </div>
+          <div className="flex-1 flex flex-col items-center gap-0.5 rounded-2xl bg-cream py-3">
+            <span className="font-heading font-extrabold text-lg text-orange">
+              {QUESTIONS.length}問
+            </span>
+            <span className="text-[11px] text-ink/50">質問数</span>
+          </div>
+          <div className="flex-1 flex flex-col items-center gap-0.5 rounded-2xl bg-cream py-3">
+            <span className="font-heading font-extrabold text-lg text-red">
+              {previewSports.length}種
+            </span>
+            <span className="text-[11px] text-ink/50">診断スポーツ</span>
+          </div>
+        </div>
         <div className="grid grid-cols-5 gap-2">
           {previewSports.map((s) => (
             <div
