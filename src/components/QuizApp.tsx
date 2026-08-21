@@ -255,6 +255,9 @@ function ResultScreen({
 }) {
   const sport = sportOf(result.winner);
   const maxScore = Math.max(...Object.values(result.scores));
+  const scoreTotal = Object.values(result.scores).reduce((a, b) => a + b, 0);
+  const matchPercent =
+    scoreTotal === 0 ? 0 : Math.round((maxScore / scoreTotal) * 100);
 
   const mailSubject = encodeURIComponent(
     `スポーツ診断結果について相談したいです（${sport.name}）`
@@ -281,6 +284,12 @@ function ResultScreen({
         </p>
         <div className="relative aspect-[4/3]">
           <SportArt sport={result.winner} className="w-full h-full" />
+          <div className="absolute top-4 right-4 flex flex-col items-center justify-center w-16 h-16 rounded-full bg-white/90 shadow-md">
+            <span className="font-heading font-extrabold text-lg leading-none text-blue">
+              {matchPercent}%
+            </span>
+            <span className="text-[10px] font-bold text-ink/50">マッチ度</span>
+          </div>
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pt-16 pb-6">
             <p className="text-xs font-bold tracking-[0.3em] text-white/70 uppercase mb-1">
               Your Result
@@ -290,6 +299,26 @@ function ResultScreen({
             </h1>
           </div>
         </div>
+      </div>
+
+      <div className="bg-card rounded-2xl p-5 shadow-sm flex items-center gap-4">
+        <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0">
+          <SportArt sport={result.winner} className="w-full h-full" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-[11px] font-bold text-orange uppercase tracking-wide mb-0.5">
+            今日からできる最初の一歩
+          </p>
+          <p className="text-sm font-bold text-ink truncate">
+            {sport.firstStep.title}
+          </p>
+          <p className="text-xs text-ink/50">
+            {sport.firstStep.duration} ・ {sport.firstStep.difficulty}
+          </p>
+        </div>
+        <span className="shrink-0 bg-orange text-white text-xs font-bold px-4 py-2 rounded-full">
+          はじめる
+        </span>
       </div>
 
       <div className="bg-card rounded-3xl p-6 md:p-8 shadow-sm flex flex-col gap-2">

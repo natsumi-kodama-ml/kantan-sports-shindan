@@ -5,11 +5,18 @@ export type SportKey =
   | "futsal"
   | "bouldering";
 
+export interface FirstStepWorkout {
+  title: string;
+  duration: string;
+  difficulty: string;
+}
+
 export interface Sport {
   key: SportKey;
   name: string;
   tagline: string;
   description: string;
+  firstStep: FirstStepWorkout;
 }
 
 export const SPORTS: Record<SportKey, Sport> = {
@@ -19,6 +26,11 @@ export const SPORTS: Record<SportKey, Sport> = {
     tagline: "自分のペースでコツコツ続ける有酸素運動",
     description:
       "道具も場所も選ばず、思い立ったらすぐ始められます。体脂肪を減らしたい人、まず何か一つ運動を習慣にしたい人に向いています。",
+    firstStep: {
+      title: "近所を15分ジョギング",
+      duration: "15分",
+      difficulty: "かんたん",
+    },
   },
   strength: {
     key: "strength",
@@ -26,6 +38,11 @@ export const SPORTS: Record<SportKey, Sport> = {
     tagline: "体を引き締め、基礎代謝を底上げする",
     description:
       "短時間でも効果を感じやすく、見た目の変化がモチベーションになります。ジムに通える環境がある人におすすめです。",
+    firstStep: {
+      title: "自宅で自重トレーニング",
+      duration: "10分",
+      difficulty: "かんたん",
+    },
   },
   yoga: {
     key: "yoga",
@@ -33,6 +50,11 @@ export const SPORTS: Record<SportKey, Sport> = {
     tagline: "心と体をゆっくり整えるマインドフル運動",
     description:
       "柔軟性や姿勢改善、リラックス効果を重視する人向け。自宅でもスタジオでも、自分のペースで取り組めます。",
+    firstStep: {
+      title: "朝の基本ストレッチ",
+      duration: "10分",
+      difficulty: "かんたん",
+    },
   },
   futsal: {
     key: "futsal",
@@ -40,6 +62,11 @@ export const SPORTS: Record<SportKey, Sport> = {
     tagline: "仲間と汗を流して楽しむチームプレー",
     description:
       "一人では続かないタイプの人でも、仲間がいれば継続しやすいのが強み。交流を楽しみながら本格的に体を動かせます。",
+    firstStep: {
+      title: "近所のフットサルコートを探す",
+      duration: "5分",
+      difficulty: "かんたん",
+    },
   },
   bouldering: {
     key: "bouldering",
@@ -47,6 +74,11 @@ export const SPORTS: Record<SportKey, Sport> = {
     tagline: "考えながら登る、達成感の高い個人競技",
     description:
       "1回ごとに小さな成功体験が得られ、飽きにくいのが特徴。新しいことに挑戦したい人、ジムで本格的に体を動かしたい人に向いています。",
+    firstStep: {
+      title: "体験レッスンに参加",
+      duration: "60分",
+      difficulty: "はじめてOK",
+    },
   },
 };
 
